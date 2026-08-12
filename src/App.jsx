@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -32,18 +32,6 @@ function AppContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
-
-  useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'page_view',
-      page_path: location.pathname + location.search,
-      page_title: document.title,
-    });
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'PageView');
-    }
-  }, [location.pathname, location.search]);
 
   const addToCart = (product, openSidebar = true) => {
     setCartItems(prevItems => {
